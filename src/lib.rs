@@ -24,38 +24,39 @@ impl TprojConfigBuilder {
             description: None,
         };
     }
-    pub fn nameit(&mut self, name: String) -> &mut Self {
+    pub fn nameit<S: ToString>(&mut self, name: S) -> &mut Self {
         match &mut self.name {
             None => {
-                self.name = Some(name);
+                self.name = Some(name.to_string());
             }
             Some(exname) => {
-                *exname = name;
+                *exname = name.to_string();
             }
         }
         return self;
     }
-    pub fn auth(&mut self, author: String) -> &mut Self {
-        self.authors.push(author);
+    pub fn auth<S: ToString>(&mut self, author: S) -> &mut Self {
+        self.authors.push(author.to_string());
         return self;
     }
-    pub fn include(&mut self, pattern: String) -> &mut Self {
-        self.includes.push(pattern);
+    pub fn include<S: ToString>(&mut self, pattern: S) -> &mut Self {
+        self.includes.push(pattern.to_string());
         return self;
     }
-    pub fn exclude(&mut self, pattern: String) -> &mut Self {
+    pub fn exclude<S: ToString>(&mut self, pattern: S) -> &mut Self {
+        let pat = pattern.to_string();
         match &mut self.excludes {
             None => {
-                self.excludes = Some(vec![pattern]);
+                self.excludes = Some(vec![pat]);
             }
             Some(exarr) => {
-                exarr.push(pattern);
+                exarr.push(pat);
             }
         };
         return self;
     }
-    pub fn describe(&mut self, description: String) -> &mut Self {
-        self.description = Some(description);
+    pub fn describe<S: ToString>(&mut self, description: S) -> &mut Self {
+        self.description = Some(description.to_string());
         return self;
     }
     pub fn build(&self) -> TprojConfig {
