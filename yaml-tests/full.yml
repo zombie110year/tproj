@@ -1,0 +1,11 @@
+name: HelloWorld
+authors:
+    - zombie110year
+includes:
+    - "README.md"
+    - "FILE0.txt"
+excludes:
+    - ".git/**"
+    - ".ignored"
+description: |
+    描述此项目

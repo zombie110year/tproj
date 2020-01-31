@@ -1,0 +1,9 @@
+name: HelloWorld
+authors:
+    - zombie110year
+includes:
+    - "README.md"
+    - "FILE0.txt"
+excludes:
+    - ".git/**"
+    - ".ignored"
