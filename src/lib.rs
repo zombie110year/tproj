@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 use serde::{Deserialize, Serialize};
+use std::fmt::Debug;
 
 /// 项目配置文件名
 pub const PROJ_CONF_FILENAME: &'static str = "tproj.yml";
@@ -81,7 +82,7 @@ impl TprojConfigBuilder {
 ///
 /// name
 /// :   模板的名字。如果不存在的
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct TprojConfig {
     name: String,
     authors: Vec<String>,
