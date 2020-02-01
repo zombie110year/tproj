@@ -1,5 +1,5 @@
 use serde_yaml;
-use tproj::TprojConfigBuilder;
+use tproj::config::TprojConfigBuilder;
 
 fn main() {
     let mut br = TprojConfigBuilder::new();
