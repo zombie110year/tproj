@@ -5,6 +5,22 @@ use std::fmt::Debug;
 /// 项目配置文件名
 pub const PROJ_CONF_FILENAME: &'static str = "tproj.yml";
 
+/// TPROJ 使用的数据、配置目录
+pub fn get_tproj_home() -> std::path::PathBuf {
+    let env_datadir: std::path::PathBuf = match std::env::var("TPROJ_HOME") {
+        Ok(dir) => std::path::PathBuf::from(dir),
+        Err(_) => match dirs::data_dir() {
+            Some(p) => p,
+            None => {
+                let home = dirs::home_dir().expect("无法获取家目录，这将导致最后一个定位 TPROJ_HOME 的备用方法失效");
+                let data_dir = home.join(".local/share/");
+                data_dir
+            }
+        },
+    };
+    env_datadir.join("tproj")
+}
+
 pub struct TprojConfigBuilder {
     name: Option<String>,
     authors: Vec<String>,
