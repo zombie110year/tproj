@@ -29,7 +29,8 @@ fn main() {
                 .expect("未获取到 list 子命令");
             let pattern = subargs.value_of("pattern").expect("未获取到 pattern 参数");
             let verbose = subargs.is_present("verbose");
-            list::cli_list(pattern, verbose);
+            list::cli_list(pattern, verbose)
+                .expect("list 指令执行失败");
         }
         Some(_) => panic!("预期外的子命令"),
         None => panic!("?"),
