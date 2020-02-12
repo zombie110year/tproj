@@ -6,17 +6,18 @@ use std::fmt::Debug;
 pub const PROJ_CONF_FILENAME: &'static str = "tproj.yml";
 
 /// TPROJ 使用的数据、配置目录
+///
+/// 按优先级排列：
+///
+/// 1. 环境变量 `TPROJ_HOME` 配置的路径
+/// 2. `dirs::data_dir()/tproj` 路径：
+///     - Linux: `$XDG_DATA_HOME/tproj`、`~/.local/share/tproj`
+///     - Windows: `$APPDATA/tproj`
+///     - MacOS: `$HOME/Library/Application/tproj`
 pub fn get_tproj_home() -> std::path::PathBuf {
     let env_datadir: std::path::PathBuf = match std::env::var("TPROJ_HOME") {
         Ok(dir) => std::path::PathBuf::from(dir),
-        Err(_) => match dirs::data_dir() {
-            Some(p) => p,
-            None => {
-                let home = dirs::home_dir().expect("无法获取家目录，这将导致最后一个定位 TPROJ_HOME 的备用方法失效");
-                let data_dir = home.join(".local/share/");
-                data_dir
-            }
-        },
+        Err(_) => dirs::data_dir().expect("无法获取到 DATA 目录路径"),
     };
     env_datadir.join("tproj")
 }
