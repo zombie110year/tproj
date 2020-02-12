@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 use crate::config::get_tproj_home;
 use crate::config::TprojConfig;
+use crate::{TEMPLATE_DIR, YML_NAME};
 use regex::Regex;
 use std::fmt::Display;
 use std::fs;
@@ -29,7 +30,7 @@ pub fn get_path<P: AsRef<str> + Display>(pattern: P) -> Result<Vec<PathBuf>, std
     let pattern = format!("{}.zip", pattern);
     let pattern = Regex::from_str(pattern.as_str()).expect("构造正则表达式失败");
     let home = get_tproj_home();
-    let adir = home.join("template");
+    let adir = home.join(TEMPLATE_DIR);
     let entries: Vec<PathBuf> = fs::read_dir(adir)?
         .map(|res| res.map(|e: fs::DirEntry| e.path()))
         .filter(|p| pattern.is_match(&p.as_ref().unwrap().file_name().unwrap().to_str().unwrap()))
@@ -45,7 +46,7 @@ pub fn get_description(p: &PathBuf) -> Option<String> {
     let p = std::path::Path::new(p);
     let file = std::fs::File::open(&p).expect("无法打开 zip 文件");
     let mut zfile = ZipArchive::new(file).expect("无法解析为可读的 zip 归档");
-    let yml = zfile.by_name("tproj.yml").expect("无法打开 tproj.yml");
+    let yml = zfile.by_name(YML_NAME).expect("无法打开 tproj.yml");
     let obj: TprojConfig = serde_yaml::from_reader(yml).expect("无法读取或解析 tproj.yml");
     return obj.description;
 }
