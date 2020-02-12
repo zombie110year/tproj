@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate clap;
 use clap::App;
+use tproj::subcommands::list;
 
 fn main() {
     let yaml = load_yaml!("cli.yml");
@@ -28,7 +29,7 @@ fn main() {
                 .expect("未获取到 list 子命令");
             let pattern = subargs.value_of("pattern").expect("未获取到 pattern 参数");
             let verbose = subargs.is_present("verbose");
-            dbg!(pattern, verbose);
+            list::cli_list(pattern, verbose);
         }
         Some(_) => panic!("预期外的子命令"),
         None => panic!("?"),

@@ -27,9 +27,9 @@ subcommands:
         about: 列出已有归档
         args:
             - pattern:
-                help: 通配符限定归档名范围
+                help: 正则表达式限定归档名范围
                 required: false
-                default_value: "*"
+                default_value: ".*"
             - verbose:
                 help: 是否显示归档的描述
                 long: verbose
