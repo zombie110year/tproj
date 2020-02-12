@@ -13,9 +13,13 @@ use zip::ZipArchive;
 pub fn cli_list<P: AsRef<str> + Display>(pattern: P, verbose: bool) -> Result<(), std::io::Error> {
     let paths = get_path(pattern)?;
     for p in paths {
-        let desc = get_description(&p).unwrap_or_default();
         let stem = p.file_stem().unwrap().to_str().unwrap();
-        println!("{}: {}", stem, desc)
+        if verbose {
+            let desc = get_description(&p).unwrap_or_default();
+            println!("* {} * {}", stem, desc)
+        } else {
+            println!("{}", stem);
+        }
     }
     Ok(())
 }
