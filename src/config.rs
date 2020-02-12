@@ -123,11 +123,11 @@ impl TprojConfigBuilder {
 /// :   模板的名字。如果不存在的
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct TprojConfig {
-    name: String,
-    authors: Vec<String>,
-    includes: Vec<String>,
-    excludes: Option<Vec<String>>,
-    description: Option<String>,
+    pub name: String,
+    pub authors: Vec<String>,
+    pub includes: Vec<String>,
+    pub excludes: Option<Vec<String>>,
+    pub description: Option<String>,
 }
 
 impl TprojConfig {
