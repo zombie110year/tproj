@@ -34,6 +34,9 @@ pub fn get_path<P: AsRef<str> + Display>(pattern: P) -> Result<Vec<PathBuf>, std
 }
 
 /// 获取指定归档文件中的描述
+///
+/// TODO: 彩色归档名
+/// TODO: 格式化多行描述
 pub fn get_description(p: &PathBuf) -> Option<String> {
     let p = std::path::Path::new(p);
     let file = std::fs::File::open(&p).expect("无法打开 zip 文件");
