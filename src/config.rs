@@ -22,6 +22,28 @@ pub fn get_tproj_home() -> std::path::PathBuf {
     env_datadir.join("tproj")
 }
 
+/// 构造 TprojConfig 结构
+///
+/// 可用方法：
+///
+/// - nameit: 设置 name 字段
+/// - auth: 设置 author 字段
+/// - include: 添加一个 include 项目
+/// - exclude: 添加一个 exclude 项目
+/// - describe: 设置 description 字段
+///
+/// ```rust
+/// let mut br = TprojConfigBuilder::new();
+/// let br = br
+///     .nameit("Example")
+///     .auth("zombie110year")
+///     .include("./main.rs")
+///     .exclude("./.git/")
+///     .describe("这是一个示例");
+/// let obj = br.build();
+/// let msg = serde_yaml::to_string(&obj).unwrap();
+/// print!("{}", msg);
+/// ```
 pub struct TprojConfigBuilder {
     name: Option<String>,
     authors: Vec<String>,
