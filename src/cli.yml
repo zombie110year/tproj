@@ -1,0 +1,35 @@
+name: tproj
+version: 0.1.0
+author: zombie110year <zombie110year@outlook.com>
+about: tproj 是一个通过 zip 归档管理项目模板的应用
+subcommands:
+    - apply:
+        about: 应用归档
+        requires:
+            -   aname
+        args:
+            - aname:
+                help: 被应用的归档名
+                required: true
+            - dest:
+                help: 将归档应用到目标文件夹
+                default_value: "."
+    - create:
+        about: 创建归档
+        args:
+            - config:
+                help: 指定一个 tproj.yml
+                short: f
+                long: config-file
+                required: false
+                default_value: "tproj.yml"
+    - list:
+        about: 列出已有归档
+        args:
+            - pattern:
+                help: 通配符限定归档名范围
+                required: false
+                default_value: "*"
+            - verbose:
+                help: 是否显示归档的描述
+                long: verbose
