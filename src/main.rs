@@ -2,6 +2,7 @@
 extern crate clap;
 use clap::App;
 use tproj::subcommands::list;
+use tproj::subcommands::create;
 
 fn main() {
     let yaml = load_yaml!("cli.yml");
@@ -20,8 +21,8 @@ fn main() {
             let subargs = args
                 .subcommand_matches("create")
                 .expect("未获取到 create 子命令 ");
-            let config = subargs.value_of("config").expect("未获取到 config 参数");
-            dbg!(config);
+            let _config = subargs.value_of("config").expect("未获取到 config 参数");
+            create::cli_create();
         }
         Some("list") => {
             let subargs = args
