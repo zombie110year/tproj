@@ -3,6 +3,7 @@ extern crate clap;
 use clap::App;
 use tproj::subcommands::list;
 use tproj::subcommands::create;
+use tproj::subcommands::apply;
 
 fn main() {
     let yaml = load_yaml!("cli.yml");
@@ -15,7 +16,7 @@ fn main() {
                 .expect("未获取到 apply 子命令");
             let aname = subargs.value_of("aname").expect("未获取到 aname 参数");
             let dest = subargs.value_of("dest").expect("未获取到目标文件夹");
-            dbg!(aname, dest);
+            apply::cli_apply(aname, dest);
         }
         Some("create") => {
             let subargs = args

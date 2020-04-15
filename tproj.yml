@@ -1,0 +1,8 @@
+name: Tproj
+authors:
+    - zombie110year
+includes:
+    - README.md
+    - Cargo.toml
+description: |
+    示例项目
