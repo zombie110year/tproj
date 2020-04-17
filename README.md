@@ -11,7 +11,7 @@ tproj 提供名为 tproj 的可执行文件，可以：根据当前目录内容�
 
 - `tproj create`
 - `tproj apply`
-- `tproj ls`
+- `tproj list`
 
 ### （create）创建模板归档
 
@@ -60,14 +60,14 @@ cd helloworld
 tproj apply helloworld
 ```
 
-### （ls）浏览已有模板
+### （list）浏览已有模板
 
-浏览已有模板，使用 `tproj ls` 子命令，将列出 `$TRPOJ_HOME/template` 下的归档文件（去除 .zip 后缀）
+浏览已有模板，使用 `tproj list` 子命令，将列出 `$TRPOJ_HOME/template` 下的归档文件（去除 .zip 后缀）
 
 示例
 
 ```sh
-tproj ls
+tproj list
 ```
 
 ## 参考资料
